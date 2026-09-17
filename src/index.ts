@@ -3,7 +3,7 @@ import cors from 'cors';
 import './database.js';
 
 // Importamos as lógicas do nosso controlador (Lembre-se da regra do .js no ESM)
-import { listarEquipamentos, cadastrarEquipamento, atualizarStatus } from './controllers/EquipamentoController.js';
+import { listarEquipamentos, cadastrarEquipamento, atualizarStatus, deletarEquipamento } from './controllers/EquipamentoController.js';
 
 const app = express();
 const port = 3000;
@@ -15,6 +15,7 @@ app.use(express.json());
 app.get('/api/equipamentos', listarEquipamentos);
 app.post('/api/equipamentos', cadastrarEquipamento);
 app.put('/api/equipamentos/:id', atualizarStatus);
+app.delete('/api/equipamentos/:id', deletarEquipamento);
 
 app.listen(port, () => {
     console.log(`Servidor de pé em http://localhost:${port} - Arquitetura Refatorada`);

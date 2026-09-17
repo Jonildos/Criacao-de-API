@@ -70,3 +70,27 @@ export const atualizarStatus = (req: Request<{ id: string }, {}, UpdateEquipamen
         res.status(200).json({ mensagem: "Equipamento atualizado!", id_modificado: id, novo_status: status });
     });
 };
+// Lógica isolada da rota DELETE
+export const deletarEquipamento = (req: Request<{ id: string }>, res: Response): any => {
+    const id = req.params.id;
+
+    // Comando SQL destrutivo: remove a linha definitivamente
+    const sql = `DELETE FROM equipamentos WHERE id = ?`;
+
+    db.run(sql, [id], function(err) {
+        if (err) {
+            console.error("Erro ao deletar:", err.message);
+            return res.status(500).json({ erro: "Erro interno no banco." });
+        }
+        
+        // Se this.changes for 0, o ID passado não existe no banco
+        if (this.changes === 0) {
+            return res.status(404).json({ erro: "Equipamento não encontrado para exclusão." });
+        }
+        
+        res.status(200).json({ 
+            mensagem: "Equipamento removido permanentemente do inventário.", 
+            id_removido: id 
+        });
+    });
+};
