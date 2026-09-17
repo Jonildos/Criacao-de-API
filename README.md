@@ -20,3 +20,12 @@ O código foi refatorado utilizando os princípios de **Separation of Concerns (
 1. Clone este repositório:
    ```bash
    git clone <URL_DO_SEU_REPOSITORIO>
+
+2. Instale as dependências
+   npm install
+   
+Endpoints CRUD
+GET /api/equipamentos
+POST /api/equipamentos
+PUT /api/equipamentos/:id
+DELETE /api/equipamentos/:id
